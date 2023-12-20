@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import TodoList from './component/TodoList';
 import Header from './component/Header';
 import Footer from './component/Footer';
-import Home from './component/Home';
+import Board from './component/Board';
 
 function App(){
 
     return(
         <Router>
-            <div>
+            <div style={{ overflowY: 'scroll', maxHeight: '800px' }}>
                 <Header />
                 <nav>
                     <ul>
@@ -19,11 +19,17 @@ function App(){
                         <li>
                             <Link to="/todo">할 일 목록</Link>
                         </li>
+                        <li>
+                            <Link to="/board">게시판</Link>
+                        </li>
                     </ul>
                 </nav>
                 <hr />
                 <Routes>
                     <Route path="/todo" element={<TodoList/>} />
+                </Routes>
+                <Routes>
+                    <Route path="/board" element={<Board/>} />
                 </Routes>
                 <Footer />
             </div>
