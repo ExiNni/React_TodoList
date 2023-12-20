@@ -1,11 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import TodoList from './component/TodoList';
+import Header from './component/Header';
+import Footer from './component/Footer';
+import Home from './component/Home';
+
 function App(){
 
     return(
         <Router>
             <div>
+                <Header />
                 <nav>
                     <ul>
                         <li>
@@ -20,6 +25,7 @@ function App(){
                 <Routes>
                     <Route path="/todo" element={<TodoList/>} />
                 </Routes>
+                <Footer />
             </div>
         </Router>
     )
