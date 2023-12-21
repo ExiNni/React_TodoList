@@ -1,56 +1,87 @@
 import React, {useEffect, useState} from "react";
+import Button from '@mui/material/Button';
+import { Pagination  } from "@mui/material";
+import Stack from '@mui/material/Stack';
+
+
+
+
+
+
 
 function Board(){
+
     const savedPosts = JSON.parse(localStorage.getItem('posts')) || [];
+
+
     const [posts, setPosts] = useState(savedPosts);
+
     const [newPost, setNewPost] = useState('');
+
+    
+
     useEffect(() =>{
-        localStorage.setItem('posts', JSON.stringify(posts));
+        localStorage.setItem('posts',JSON.stringify(posts));
     }, [posts]);
 
+
+
     const addPost = () => {
-    if (newPost.trim() !== '') {
-        const updatedPosts = [...posts, newPost];
-        setPosts(updatedPosts);
+        setPosts([...posts, newPost]);
         setNewPost('');
 
-        localStorage.setItem('posts', JSON.stringify(updatedPosts));
     }
-};
 
-
+    //게시글 삭제 함수
     const deletePost = (index) => {
         const removePost = [...posts];
-        removePost.splice(index, 1); 
+        removePost.splice(index, 1);
         setPosts(removePost);
-        localStorage.setItem('posts', JSON.stringify(removePost));
+        localStorage.setItem('posts', JSON.stringify(removePost))
     };
+
+    
+    
+   
+
 
     return (
         <div>
+            
             <h1>게시판</h1>
+            <div className="board">
             <div>
-                <textarea
-                    placeholder="게시글을 입력하세요."
-                    value={newPost}
-                    onChange={(e) => setNewPost(e.target.value)}
-                >
+            <textarea
+                placeholder="게시글을 입력하세요."
+                
+                value={newPost}
+                onChange={(e) => setNewPost(e.target.value)}
+            >
+                
                 </textarea>
                 <br/>
-                <button onClick={addPost}>게시글 추가</button>
-            </div>
-            <div>
-                <h2>게시글 목록</h2>
-                <ul>
-                    {posts.map((post, index) => (
-                        <li key={index}>
-                            {post}
-                            <button onClick={() => deletePost(index)}>삭제</button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
-    )
+                <Button variant="contained" onClick={addPost}>게시글 추가</Button>
+                </div>
+                </div>
+                    <div>
+                        <h2>게시글 목록</h2>
+                        <ul>
+                            {posts.map((post,Index) => (
+                                <li
+                                key={Index}>
+                                    {post}
+                                <Button variant="contained" onClick={() => deletePost(Index)}>삭제하기</Button>
+                                </li>
+                            ))}
+                        </ul>
+                        <Pagination count={3} color="primary" />
+                        
+                    </div>
+                </div>
+        )
+
 };
+
+
+
 export default Board;
