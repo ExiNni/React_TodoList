@@ -9,7 +9,7 @@ function App(){
 
     return(
         <Router>
-            <div style={{ overflowY: 'scroll', maxHeight: '800px' }}>
+            <div style={{ overflowY: 'scroll', maxHeight: '830px' }}>
                 <Header />
                 <nav>
                     <ul>
